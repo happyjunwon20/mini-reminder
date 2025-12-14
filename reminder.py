@@ -23,9 +23,9 @@ if "Username" not in st.session_state:
 if "nowname" not in st.session_state:
     st.session_state.nowname = ""
 
-st.header("이름")
-nameinput = st.text_input("이름을 입력하세요")
-if st.button("완료"):
+st.sidebar.header("이름")
+nameinput = st.sidebar.text_input("이름을 입력하세요")
+if st.sidebar.button("완료"):
     st.session_state.nowname = nameinput
     with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "a", encoding = "utf-8") as f:
             f.write("")
@@ -67,9 +67,19 @@ try:
     
                 for j, todo in enumerate(st.session_state.todolist[i]):
                     st.write(f"{j + 1}번째 할 일 : {todo}")
+                    if st.button("완료", key = f"{st.session_state.nowname}_{i}_{j}"):
+                        st.info("완료되었습니다.")
+                        st.session_state.todolist[i].pop(j)
+                        x = st.session_state.todolist[i]
+                        with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "w", encoding = "utf-8") as f:
+                            f.write("")
+                        for lineof in x:
+                            with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "a", encoding = "utf-8") as f:
+                                f.write(f"{lineof}\n")
+                        st.rerun()
             else:
                 st.info("아직 할 일이 없어요. ")
-except:
+except st.errors.StreamlitInvalidColumnSpecError:
     st.info("아직 아무도 없어요")
 if st.button("전체 삭제"):
     with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "w", encoding = "utf-8") as f:
