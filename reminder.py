@@ -27,14 +27,17 @@ st.header("이름")
 nameinput = st.text_input("이름을 입력하세요")
 if st.button("완료"):
     st.session_state.nowname = nameinput
-    st.session_state.Username.append(st.session_state.nowname)
-    st.session_state.todolist.append([])
-    try:
-        with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "r", encoding = "utf-8") as f:
-            for lin in f:
-                st.session_state.todolist[st.session_state.Username.index(st.session_state.nowname)].append(lin.rstrip())
-    except:
-        st.session_state.todolist[st.session_state.Username.index(st.session_state.nowname)] = []
+    with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "w", encoding = "utf-8") as f:
+            f.write("")
+    if st.session_state.nowname not in st.session_state.Username:
+        st.session_state.Username.append(st.session_state.nowname)
+        st.session_state.todolist.append([])
+        try:
+            with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "r", encoding = "utf-8") as f:
+                for lin in f:
+                    st.session_state.todolist[st.session_state.Username.index(st.session_state.nowname)].append(lin.rstrip())
+        except:
+            st.session_state.todolist[st.session_state.Username.index(st.session_state.nowname)] = []
 
 st.header("새 할일 추가")
 
