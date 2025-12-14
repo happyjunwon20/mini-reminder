@@ -47,7 +47,7 @@ if st.button("할 일 추가하기"):
     if st.session_state.Username:
         if new_todo:
             st.session_state.todolist[st.session_state.Username.index(st.session_state.nowname)].append(new_todo)
-            with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "w", encoding = "utf-8") as f:
+            with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "a", encoding = "utf-8") as f:
                 f.write(new_todo + "\n")
             st.info(f"{new_todo} 할 일이 추가되었습니다")
             st.rerun()
@@ -72,6 +72,8 @@ try:
 except:
     st.info("아직 아무도 없어요")
 if st.button("전체 삭제"):
+    with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "w", encoding = "utf-8") as f:
+        f.write("")
     st.session_state.todolist[st.session_state.Username.index(st.session_state.nowname)] = []
     st.info("모든 할 일이 삭제되었습니다")
     st.rerun()
