@@ -27,7 +27,7 @@ st.header("이름")
 nameinput = st.text_input("이름을 입력하세요")
 if st.button("완료"):
     st.session_state.nowname = nameinput
-    with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "w", encoding = "utf-8") as f:
+    with open(rf"C:\Users\주원\Desktop\난 최고여\사람들의 리마인더\{st.session_state.nowname}.txt", "a", encoding = "utf-8") as f:
             f.write("")
     if st.session_state.nowname not in st.session_state.Username:
         st.session_state.Username.append(st.session_state.nowname)
